@@ -29,7 +29,6 @@ class Migration(migrations.Migration):
     dependencies = [
         ("property", "0011_alter_flat_owner_pure_phone"),
     ]
-
     operations = [
         migrations.RunPython(
             normalize_phone_numbers,
