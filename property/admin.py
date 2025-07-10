@@ -4,7 +4,7 @@ from .models import Flat, Complaint
 
 @admin.register(Flat)
 class FlatAdmin(admin.ModelAdmin):
-    search_fields = ("town", "town_district", "address",)
+    search_fields = ("town", "town_district", "address", "owner_pure_phone",)
     readonly_fields = ("created_at",)
     list_display = ("address", "price", "new_building", "construction_year", "town",)
     list_editable = ("new_building",)
