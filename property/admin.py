@@ -3,6 +3,11 @@ from .models import Flat, Complaint, Owner
 
 
 
+class OwnersInstanceInline(admin.TabularInline):
+    model = Flat.owners.through
+    raw_id_fields = ('owner',)
+
+
 @admin.register(Owner)
 class OwnerAdmin(admin.ModelAdmin):
     list_display = ("name", "phone", "pure_phone", )
@@ -18,7 +23,7 @@ class FlatAdmin(admin.ModelAdmin):
     list_editable = ("new_building",)
     list_filter = ("new_building", "rooms_number", "has_balcony",)
     raw_id_fields = ('liked_by','owners',)
-
+    inlines = [OwnersInstanceInline]
 
 @admin.register(Complaint)
 class ComplaintAdmin(admin.ModelAdmin):
