@@ -7,7 +7,7 @@ def transfer_owners_to_new_model(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
 
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator():
         if not flat.owner or not flat.owners_phonenumber:
             continue
 
@@ -26,9 +26,9 @@ def transfer_owners_to_new_model(apps, schema_editor):
 def reverse_transfer_owners_to_new_model(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     Owner = apps.get_model('property', 'Owner')
-    for flat in Flat.objects.all():
+    for flat in Flat.objects.all().iterator():
         flat.owners.clear()
-    for owner in Owner.objects.all():
+    for owner in Owner.objects.all().iterator():
         owner.owned_flats.clear()
 
     Owner.objects.all().delete()
